@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Real_State_Catalog_WCF.Models;
-using VolunteerRequestApp.Server.Core;
+using Real_State_Catalog_WCF.Data;
 
 namespace Real_State_Catalog.API
 {
