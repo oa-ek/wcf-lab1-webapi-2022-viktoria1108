@@ -5,9 +5,10 @@ using Real_State_Catalog.Models;
 
 namespace Real_State_Catalog.API
 {
-
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
+    //[Consumes("application/json")]
     public class FilterController : ControllerBase
     {
 
@@ -19,7 +20,7 @@ namespace Real_State_Catalog.API
         }
 
         // GET: api/<FilterController>
-        [HttpGet("{city}/{Type}/{nbPerson}/{PricePerNight}/")]
+        [HttpGet]
         public async Task<IEnumerable<Offer>> Get(string city, string Type, string nbPerson, string PricePerNight)
         {
             IEnumerable<Offer>? offers = null;

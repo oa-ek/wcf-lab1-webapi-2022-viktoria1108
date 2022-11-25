@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace Real_State_Catalog.API
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
+    //[Consumes("application/json")]
     public class SearchController : ControllerBase
     {       
         
@@ -20,6 +22,7 @@ namespace Real_State_Catalog.API
 
             // GET: api/<SearchController>
             [HttpGet("{city}/{arrivalDate}/{departureDate}/{nbPerson}")]
+            
             public async Task<IEnumerable<Offer>> Get(string city, string arrivalDate, string departureDate, string nbPerson)
             {
                 IEnumerable<Offer>? offers = null;

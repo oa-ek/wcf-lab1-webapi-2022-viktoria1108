@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Real_State_Catalog.Data;
 using Real_State_Catalog.Models;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace BookingApp
 {
@@ -40,6 +42,10 @@ namespace BookingApp
                 o.ValidationInterval = TimeSpan.FromSeconds(0));
 
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen();
+            
+
         }
 
         // Цей метод викликається середовищем виконання. Використовується цей метод для налаштування конвеєра запиту HTTP.
@@ -48,6 +54,7 @@ namespace BookingApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -56,6 +63,7 @@ namespace BookingApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -70,6 +78,9 @@ namespace BookingApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
         }
     }
 }
