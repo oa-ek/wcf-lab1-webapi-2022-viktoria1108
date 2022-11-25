@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 
-namespace Real_State_Catalog.Models
+namespace Real_State_Catalog_WCF.Models
 {
     public class Accommodation
     {

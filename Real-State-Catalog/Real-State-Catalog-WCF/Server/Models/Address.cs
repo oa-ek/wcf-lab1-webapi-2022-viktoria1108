@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 
-namespace Real_State_Catalog.Models
+namespace Real_State_Catalog_WCF.Models
 {
     public class Address
     {

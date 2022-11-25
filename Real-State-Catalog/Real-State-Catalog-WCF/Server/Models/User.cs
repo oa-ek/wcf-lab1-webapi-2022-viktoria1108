@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Real_State_Catalog.Models
+namespace Real_State_Catalog_WCF.Models
 {
     public class User: IdentityUser
     {

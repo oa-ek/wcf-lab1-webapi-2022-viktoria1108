@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Real_State_Catalog.Models
+namespace Real_State_Catalog_WCF.Models
 {
     public class Booking
     {
