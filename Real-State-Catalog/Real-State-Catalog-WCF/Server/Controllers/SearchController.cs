@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Real_State_Catalog_WCF.Models;
-using System.Collections.Generic;
 using System.Data.Entity;
 using VolunteerRequestApp.Server.Core;
 
@@ -9,66 +7,62 @@ namespace Real_State_Catalog_WCF.API
 {
     [ApiController]
     [Route("api/[controller]")]
-    
-    //[Consumes("application/json")]
     public class SearchController : ControllerBase
-    {       
-        
-            private readonly AppContextDb _context;
+    {
 
-            public SearchController(AppContextDb context)
+        private readonly AppContextDb _context;
+        public SearchController(AppContextDb context)
+        {
+            _context = context;
+        }
+
+        // GET: api/<SearchController>
+        [HttpGet("{city}/{arrivalDate}/{departureDate}/{nbPerson}")]
+
+        public async Task<IEnumerable<Offer>> Get(string city, string arrivalDate, string departureDate, string nbPerson)
+        {
+            IEnumerable<Offer>? offers = null;
+
+            DateTime arrivalDateTime = DateTime.ParseExact(arrivalDate, "yyyy-MM-dd", null);
+            DateTime departureDateTime = DateTime.ParseExact(departureDate, "yyyy-MM-dd", null);
+            int nbPersonInt = int.Parse(nbPerson);
+
+            if (arrivalDateTime < departureDateTime && !city.Equals(""))
             {
-                _context = context;
-            }
+                offers = await _context.Offers
+                    .Where(o => o.StartAvailability <= arrivalDateTime && o.EndAvailability > arrivalDateTime && o.EndAvailability >= departureDateTime)
+                    .Where(o => o.Accommodation.Address.City == city && o.Accommodation.MaxTraveler >= nbPersonInt)
 
-            // GET: api/<SearchController>
-            [HttpGet("{city}/{arrivalDate}/{departureDate}/{nbPerson}")]
-            
-            public async Task<IEnumerable<Offer>> Get(string city, string arrivalDate, string departureDate, string nbPerson)
-            {
-                IEnumerable<Offer>? offers = null;
+                    .Select(o => new Offer
+                    {
+                        Id = o.Id,
+                        AddingDateTime = o.AddingDateTime,
+                        StartAvailability = o.StartAvailability,
+                        EndAvailability = o.EndAvailability,
+                        PricePerNight = o.PricePerNight,
+                        CleaningFee = o.CleaningFee,
 
-                DateTime arrivalDateTime = DateTime.ParseExact(arrivalDate, "yyyy-MM-dd", null);
-                DateTime departureDateTime = DateTime.ParseExact(departureDate, "yyyy-MM-dd", null);
-                int nbPersonInt = int.Parse(nbPerson);
-
-                if (arrivalDateTime < departureDateTime && !city.Equals(""))
-                {
-                    offers = await _context.Offers
-                        .Where(o => o.StartAvailability <= arrivalDateTime && o.EndAvailability > arrivalDateTime && o.EndAvailability >= departureDateTime)
-                        .Where(o => o.Accommodation.Address.City == city && o.Accommodation.MaxTraveler >= nbPersonInt)
-                        //.Include(o => o.Accommodation.Pictures)
-                        //Include(o => o.Accommodation.Address)
-                        .Select(o => new Offer
+                        Accommodation = new Accommodation
                         {
-                            Id = o.Id,
-                            AddingDateTime = o.AddingDateTime,
-                            StartAvailability = o.StartAvailability,
-                            EndAvailability = o.EndAvailability,
-                            PricePerNight = o.PricePerNight,
-                            CleaningFee = o.CleaningFee,
+                            Name = o.Accommodation.Name,
+                            Type = o.Accommodation.Type,
+                            Description = o.Accommodation.Description,
+                            MaxTraveler = o.Accommodation.MaxTraveler,
 
-                            Accommodation = new Accommodation
+                            Address = new Address
                             {
-                                Name = o.Accommodation.Name,
-                                Type = o.Accommodation.Type,
-                                Description = o.Accommodation.Description,
-                                MaxTraveler = o.Accommodation.MaxTraveler,
+                                City = o.Accommodation.Address.City,
+                                Country = o.Accommodation.Address.Country
+                            },
 
-                                Address = new Address
-                                {
-                                    City = o.Accommodation.Address.City,
-                                    Country = o.Accommodation.Address.Country
-                                },
-
-                                Pictures = o.Accommodation.Pictures
-                            }
-                        })
-                        .ToListAsync();
-                }
-
-                return offers;
+                            Pictures = o.Accommodation.Pictures
+                        }
+                    })
+                    .ToListAsync();
             }
+
+            return offers;
+        }
         }
     }
 
