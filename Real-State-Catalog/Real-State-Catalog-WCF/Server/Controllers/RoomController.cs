@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Real_State_Catalog_WCF.Models;
-using VolunteerRequestApp.Server.Core;
+using Real_State_Catalog_WCF.Data;
 
 namespace Real_State_Catalog_WCF.Controllers
 {
@@ -125,6 +125,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         [HttpGet]
+        [Route("SaveRoom")]
         private async Task SaveRoom(Guid accommodationId, string roomType, List<Amenity> amenities)
         {
             Room room = new()
@@ -139,6 +140,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         [HttpGet]
+        [Route("AddAmetityIfChecked")]
         private static void AddAmenityIfChecked(List<Amenity> amenities, string amenity, string name)
         {
             if (amenity != null && amenity.Equals("on"))
@@ -147,6 +149,7 @@ namespace Real_State_Catalog_WCF.Controllers
             }
         }
         [HttpGet]
+        [Route("AddMultipleAmenities")]
         private static void AddMultipleAmenities(List<Amenity> amenities, string amenityNb, string name)
         {
             if (amenityNb != null)

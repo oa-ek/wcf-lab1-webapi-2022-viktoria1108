@@ -2,7 +2,7 @@
 using Real_State_Catalog_WCF.Models;
 using System.Data.Common;
 
-namespace VolunteerRequestApp.Server.Core
+namespace Real_State_Catalog_WCF.Data
 {
     public class AppContextDb : DbContext
     {

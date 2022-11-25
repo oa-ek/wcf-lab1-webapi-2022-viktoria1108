@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Real_State_Catalog_WCF.Models;
-using VolunteerRequestApp.Server.Core;
+using Real_State_Catalog_WCF.Data;
 
 namespace Real_State_Catalog_WCF.Controllers
 {
@@ -19,6 +19,7 @@ namespace Real_State_Catalog_WCF.Controllers
             _userId = userId;
         }
         [HttpPost]
+        [Route("Add")]
         public async Task Add(Guid offerId)
         {
             // Перевірте, чи вже існує закладка для підключеного користувача
@@ -33,6 +34,7 @@ namespace Real_State_Catalog_WCF.Controllers
             }
         }
         [HttpGet]
+        [Route("Delete")]
         public async Task Delete(Guid offerId)
         {
             var bookmark = BookmarkExists(offerId);
