@@ -25,6 +25,7 @@ namespace Real_State_Catalog_WCF.Controllers
 
         // GET: Accommodation
         [HttpGet, ActionName("Index")]
+        [Route("Index")]
         public async Task<IActionResult> Index()
         {
             User user = await _userManager.GetUserAsync(User);
@@ -47,6 +48,7 @@ namespace Real_State_Catalog_WCF.Controllers
         
         // Post: Accommodation/Details
         [HttpPost, ActionName("Details")]
+        [Route("Details")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -103,7 +105,8 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // Post: Accommodation/Edit
-        [NonAction]
+        [HttpGet]
+        [Route("Edit")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -165,7 +168,8 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Accommodation/Delete
-        [NonAction]
+        [HttpGet]
+        [Route("Delete")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -184,9 +188,10 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // POST: Accommodation/Delete
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        [NonAction]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Route("Delete")]
+        
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var accommodation = await _context.Accommodations.FindAsync(id);
@@ -194,7 +199,7 @@ namespace Real_State_Catalog_WCF.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+       
         [NonAction]
         private bool AccommodationExists(Guid id)
         {
