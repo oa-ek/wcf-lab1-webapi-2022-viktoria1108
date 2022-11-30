@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\Real-State-Catalog-WCF.Client.csproj" />
     <ProjectReference Include="..\Shared\Real-State-Catalog-WCF.Shared.csproj" />
   </ItemGroup>
 
