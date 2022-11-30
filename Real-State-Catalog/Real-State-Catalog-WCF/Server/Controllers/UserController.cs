@@ -47,7 +47,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: UserController
-        [HttpGet]
+        [NonAction]
         [Route("index")]
         public async Task<IActionResult> Index()
         {
@@ -148,7 +148,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: UserController/Delete
-        [HttpGet]
+        [HttpDelete]
         [Route("Delete")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -168,7 +168,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // POST: UserController/Delete
-        [HttpPost, ActionName("Delete")]
+        [NonAction]
         [ValidateAntiForgeryToken]
         [Route("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)

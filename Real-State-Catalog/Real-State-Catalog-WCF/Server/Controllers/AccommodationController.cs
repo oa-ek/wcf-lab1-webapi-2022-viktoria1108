@@ -23,13 +23,9 @@ namespace Real_State_Catalog_WCF.Controllers
             _environment = environment;
         }
 
-        /// <summary>
-        /// Method takes brand from db
-        /// </summary>
-
-        /// <returns>brand from db</returns>
-        [HttpGet]
-        
+        // GET: Accommodation
+        [NonAction]
+        [Route("Index")]
         public async Task<IActionResult> Index()
         {
             User user = await _userManager.GetUserAsync(User);
@@ -49,8 +45,11 @@ namespace Real_State_Catalog_WCF.Controllers
             }
         }
 
+
         
-        // Post: Accommodation/Details
+        /// <summary>
+        /// method returns details about Accommodation
+        /// </summary>
         [HttpPost, ActionName("Details")]
         [Route("Details")]
         public async Task<IActionResult> Details(Guid? id)
@@ -172,7 +171,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Accommodation/Delete
-        [HttpGet]
+        [HttpDelete]
         [Route("Delete")]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -192,7 +191,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // POST: Accommodation/Delete
-        [HttpPost, ActionName("Delete")]
+        [NonAction, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("Delete")]
         

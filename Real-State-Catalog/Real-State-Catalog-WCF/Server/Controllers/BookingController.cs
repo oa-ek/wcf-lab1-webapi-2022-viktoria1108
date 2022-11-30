@@ -23,7 +23,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Booking
-        [HttpGet]
+        [NonAction]
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
@@ -47,7 +47,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Booking/HostIndex
-        [HttpGet]
+        [NonAction]
         [Authorize(Roles = "Host, Admin")]
         [Route("HostIndex")]
         public async Task<IActionResult> HostIndex()

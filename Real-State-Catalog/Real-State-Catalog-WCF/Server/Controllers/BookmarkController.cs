@@ -33,7 +33,7 @@ namespace Real_State_Catalog_WCF.Controllers
                 await _context.SaveChangesAsync();
             }
         }
-        [HttpGet]
+        [HttpDelete]
         [Route("Delete")]
         public async Task Delete(Guid offerId)
         {

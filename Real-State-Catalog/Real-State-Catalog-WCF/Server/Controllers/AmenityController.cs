@@ -21,7 +21,7 @@ namespace Real_State_Catalog_WCF.Controllers
         // GET: Accommodation/ManageAmenities
       
         [Route("ManageAmenities/{roomId:guid?}")]
-        [HttpGet]
+        [NonAction]
         public async Task<IActionResult> ManageAmenities(Guid? roomId)
         {
             if (roomId == null) { return NotFound(); }
@@ -75,7 +75,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // POST: Accommodation/DeleteAmenity
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteAmenity/{amenityId:guid}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAmenity(Guid amenityId, Guid roomId)

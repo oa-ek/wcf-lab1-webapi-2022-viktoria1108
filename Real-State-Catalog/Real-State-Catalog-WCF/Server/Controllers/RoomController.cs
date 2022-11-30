@@ -162,7 +162,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Accommodation/DeletePicture
-        [HttpPost]
+        [HttpDelete]
         [Route("Accommodation/DeleteRoom/{id}")]
         public async Task<IActionResult> DeleteRoom(Guid id, Guid accommodationId)
         {
