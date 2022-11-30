@@ -23,9 +23,13 @@ namespace Real_State_Catalog_WCF.Controllers
             _environment = environment;
         }
 
-        // GET: Accommodation
-        [HttpGet, ActionName("Index")]
-        [Route("Index")]
+        /// <summary>
+        /// Method takes brand from db
+        /// </summary>
+
+        /// <returns>brand from db</returns>
+        [HttpGet]
+        
         public async Task<IActionResult> Index()
         {
             User user = await _userManager.GetUserAsync(User);

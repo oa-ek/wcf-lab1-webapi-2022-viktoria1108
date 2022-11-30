@@ -19,6 +19,7 @@ namespace Real_State_Catalog_WCF.Controllers
         }
 
         // GET: Accommodation/ManageAmenities
+      
         [Route("ManageAmenities/{roomId:guid?}")]
         [HttpGet]
         public async Task<IActionResult> ManageAmenities(Guid? roomId)
@@ -40,7 +41,7 @@ namespace Real_State_Catalog_WCF.Controllers
             string roomType = room.RoomType.ToString();
 
             ViewBag.AmenityTypes = AmenityTools.AmenitiesForRoom(roomType);
-
+            
             return View(room);
         }
 
